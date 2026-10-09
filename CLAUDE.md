@@ -1,6 +1,6 @@
-# Project: GPU Telemetry Threat Detection (hackathon)
+# Project: GPU Telemetry Threat Detection 
 
-Real-time security observability for GPU fleets. Pitch: "your observability pipeline
+Real-time security observability for GPU fleets. One-liner: "your observability pipeline
 is already a security sensor."
 
 ## Architecture

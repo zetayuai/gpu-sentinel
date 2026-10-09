@@ -80,4 +80,4 @@ SELECT now() AS detected_at, 'thermal' AS rule, 'medium' AS severity,
        concat('temp_c=', toString(temp_c)) AS detail,
        parseDateTime64BestEffort(event_time) AS event_time
 FROM telemetry.kafka_gpu_raw
-WHERE temp_c > 85;
+WHERE temp_c > 92;

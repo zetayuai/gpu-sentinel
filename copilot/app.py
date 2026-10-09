@@ -16,7 +16,10 @@ from senso import get_playbook_context
 
 BACKEND = os.environ.get("BACKEND", "clickhouse")
 MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
-client = OpenAI()  # OPENAI_API_KEY (+ OPENAI_BASE_URL for AkashML / Anthropic-compat)
+# Empty OPENAI_BASE_URL means "use the default api.openai.com" (compose always sets the var)
+# SDK treats an empty OPENAI_BASE_URL env var as a literal URL, and compose always
+# sets the var — so pass an explicit base_url: custom endpoint or the real default.
+client = OpenAI(base_url=os.environ.get("OPENAI_BASE_URL") or "https://api.openai.com/v1")
 
 CH_SCHEMA = """
 ClickHouse database: telemetry. Dialect: ClickHouse SQL (toStartOfMinute, now(), INTERVAL).

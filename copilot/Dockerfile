@@ -1,5 +1,5 @@
 FROM python:3.12-slim
-RUN pip install --no-cache-dir streamlit clickhouse-connect trino openai pandas requests
+RUN pip install --no-cache-dir streamlit clickhouse-connect trino "openai<2" "httpx<0.28" pandas requests
 COPY app.py senso.py /app/
 COPY playbooks /app/playbooks
 EXPOSE 8501

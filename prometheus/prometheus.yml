@@ -1,0 +1,18 @@
+global:
+  scrape_interval: 10s
+scrape_configs:
+  - job_name: producer            # the telemetry pipeline's own health
+    static_configs: [{ targets: ["producer:8000"] }]
+  - job_name: kafka               # broker/consumer-lag metrics
+    static_configs: [{ targets: ["kafka-exporter:9308"] }]
+  - job_name: prometheus
+    static_configs: [{ targets: ["localhost:9090"] }]
+  - job_name: trino                # query engine: running/queued queries, memory
+    metrics_path: /metrics
+    http_headers:
+      X-Trino-User:
+        values: ["prometheus"]
+    static_configs: [{ targets: ["trino:8080"] }]
+  - job_name: spark-driver         # streaming job: batch duration, state rows
+    metrics_path: /metrics/prometheus/
+    static_configs: [{ targets: ["spark:4040"] }]

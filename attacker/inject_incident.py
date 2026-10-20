@@ -1,7 +1,7 @@
 """Incident injector: makes host-0007 look compromised (cryptomining signature)
 and gives host-0013 a hardware fault, so the Copilot has something to find.
 
-Run from your Mac (needs: pip install kafka-python-ng):
+Run from your Mac (needs: pip install kafka-python):
   python3 attacker/inject_incident.py
 Or inside docker:
   docker exec gpu-producer python -c "$(cat attacker/inject_incident.py)"

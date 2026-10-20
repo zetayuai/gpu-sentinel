@@ -3,10 +3,10 @@
 Flow (per the architecture):
   1. Analyst prompt (Streamlit)
   2. Senso.ai ground truth: retrieve the org's actual playbooks/SOPs
-  3. LLM drafts SQL  ->  HUMAN APPROVAL GATE (Guild.ai control-plane pattern)
+  3. LLM drafts SQL  ->  HUMAN APPROVAL GATE
   4. Approved SQL runs on ClickHouse (ms latency over millions of rows)
   5. Verdict grounded in the playbook, with the SOP's own response steps
-Sidebar tracks tokens/cost per step — the telemetry a Guild.ai control plane consumes.
+Sidebar tracks tokens/cost per LLM step.
 """
 import os, re, time
 import pandas as pd

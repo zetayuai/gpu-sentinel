@@ -2,7 +2,7 @@
 
 ## 0. Prereqs
 - Docker Desktop running, 8-10 GB RAM allocated
-- Python 3 on host: `pip3 install kafka-python-ng`
+- Python 3 on host: `pip3 install kafka-python`
 - `.env` next to docker-compose.yml (copy from .env.example), at minimum OPENAI_API_KEY
 
 ## 1. Start the stack (~3-5 min first time)
@@ -48,7 +48,7 @@ docker exec clickhouse clickhouse-client --queries-file /backfill/backfill.sql  
 docker exec clickhouse clickhouse-client --time -q \
  "SELECT host_id, max(temp_c) FROM telemetry.gpu_metrics GROUP BY host_id ORDER BY 2 DESC LIMIT 10"
 ```
-PASS: aggregation over 50M+ rows returns in well under 1s; note the printed time for judges.
+PASS: aggregation over 50M+ rows returns in well under 1s; note the printed time.
 
 ### T5. IR Copilot (http://localhost:8501)
 1. Pick "Show the latest 20 alerts..." -> Draft investigation

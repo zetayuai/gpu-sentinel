@@ -5,3 +5,4 @@ __pycache__/
 *.log
 checkpoints/
 warehouse/
+.claude/settings.local.json

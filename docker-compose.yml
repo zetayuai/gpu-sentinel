@@ -1,6 +1,6 @@
-# Mini GPU-telemetry platform: Kafka -> Spark Structured Streaming -> Iceberg on MinIO -> Trino
-# plus Prometheus + Grafana for the operational path.
-# Run:  docker compose up -d   (needs ~8-10 GB RAM in Docker Desktop)
+# GPU-Sentinel stack: producer -> Kafka -> ClickHouse (insert-time detection) -> IR copilot,
+# plus Prometheus + Grafana for pipeline health and an optional Spark -> Iceberg -> Trino path.
+# Run:  docker compose up -d --build   (needs ~8-10 GB RAM in Docker Desktop)
 services:
 
   kafka:
@@ -55,7 +55,7 @@ services:
     restart: unless-stopped
 
   copilot:
-    build: ./copilot
+    build: { context: ., dockerfile: copilot/Dockerfile }
     container_name: ir-copilot
     ports: ["8501:8501"]
     environment:

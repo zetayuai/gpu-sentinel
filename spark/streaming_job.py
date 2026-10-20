@@ -5,7 +5,7 @@ Run inside the spark container:
     --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5,org.apache.hadoop:hadoop-aws:3.3.4 \
     /home/iceberg/jobs/streaming_job.py
 
-Interview talking points baked in:
+Design notes:
 - explicit schema + DLQ split (never let one bad record kill the stream)
 - event-time watermark (bounded state, deterministic late-data policy)
 - 1-min tumbling window aggregation keyed (host_id, gpu_index)

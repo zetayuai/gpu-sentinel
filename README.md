@@ -41,7 +41,7 @@ cp .env.example .env            # set OPENAI_API_KEY (any OpenAI-compatible prov
 docker compose up -d --build    # first run ~5 min
 
 # simulate an attack (cryptojack on host-0007, hardware fault on host-0013):
-pip3 install kafka-python-ng
+pip3 install kafka-python
 python3 attacker/inject_incident.py
 
 # watch detections land within ~2 s:
@@ -113,5 +113,15 @@ sharded Prometheus (Thanos), schema registry, scheduled Iceberg compaction.
 | `playbooks/` | incident-response SOPs (the ground truth) |
 | `attacker/` | incident injector for demos |
 | `spark/`, `trino/` | lakehouse path |
+| `sql/capacity_queries.sql` | Trino capacity-planning queries over the lakehouse |
 | `TESTING.md` | stage-by-stage test plan |
-| `PITCH.md` | 3-minute demo script |
+
+## Security notes
+
+This is a local demo stack. Every service runs with default or no credentials
+(MinIO `admin/password`, Grafana `admin/admin`, ClickHouse `default` with no password) and
+binds to localhost ports. Do not expose it as-is.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

@@ -1,6 +1,6 @@
 """Simulates DCGM-style GPU telemetry for N hosts and produces to Kafka.
 
-Interview talking points baked in:
+Design notes:
 - key = host_id            -> per-host ordering on one partition
 - acks=all + idempotence   -> no dup/loss on retry
 - zstd-style batching      -> throughput (gzip here; zstd needs extra lib)

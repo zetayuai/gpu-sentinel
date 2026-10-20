@@ -10,6 +10,8 @@ organization's own incident playbooks.
 
 **Numbers:** 3,200 rows/s live ingest · 50M+ row history · ~56 ms aggregations · <2 s event→alert
 
+![IR copilot investigating live alerts](demo-assets/copilot-alerts-demo.png)
+
 ## Architecture
 
 ```
@@ -86,7 +88,7 @@ models on **Akash (AkashML)** or any OpenAI-compatible host.
 
 ```bash
 docker exec -it spark spark-submit \
-  --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1 \
+  --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5,org.apache.hadoop:hadoop-aws:3.3.4 \
   /home/iceberg/jobs/streaming_job.py
 # after ~2 min:
 docker exec -it trino trino --execute "SELECT count(*) FROM iceberg.telemetry.gpu_metrics_1m"

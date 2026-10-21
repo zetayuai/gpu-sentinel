@@ -14,6 +14,8 @@ organization's own incident playbooks.
 
 ## Architecture
 
+![GPU-Sentinel architecture](demo-assets/architecture.svg)
+
 ```
 producer (2,000 hosts x 8 GPUs, DCGM-style metrics, 5s)
   → Kafka  topic telemetry.gpu.raw (8 partitions, key=host_id)

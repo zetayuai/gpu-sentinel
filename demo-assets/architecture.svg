@@ -1,0 +1,64 @@
+<svg width="680" height="520" viewBox="0 0 680 520" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>GPU-Sentinel architecture</title>
+  <desc>Fleet simulator and attacker feed Kafka. The real-time lane goes through ClickHouse detection to alerts, the copilot, and Grafana. The lakehouse lane goes through Spark streaming to Iceberg on MinIO and Trino.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#73726c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+      .th { font-size: 14px; font-weight: 500; }
+      .ts { font-size: 12px; font-weight: 400; }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="680" height="520" fill="#ffffff"/>
+
+  <rect x="130" y="40" width="180" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text class="th" x="220" y="58" text-anchor="middle" dominant-baseline="central" fill="#085041">Fleet simulator</text>
+  <text class="ts" x="220" y="78" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">2,000 hosts &#215; 8 GPUs</text>
+
+  <rect x="370" y="40" width="180" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text class="th" x="460" y="58" text-anchor="middle" dominant-baseline="central" fill="#085041">Attacker injector</text>
+  <text class="ts" x="460" y="78" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">forged samples</text>
+
+  <rect x="255" y="130" width="170" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+  <text class="th" x="340" y="148" text-anchor="middle" dominant-baseline="central" fill="#085041">Kafka</text>
+  <text class="ts" x="340" y="168" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">keyed by host_id</text>
+
+  <line x1="220" y1="100" x2="300" y2="126" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="460" y1="100" x2="380" y2="126" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="50" y="230" width="260" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+  <text class="th" x="180" y="248" text-anchor="middle" dominant-baseline="central" fill="#712B13">ClickHouse</text>
+  <text class="ts" x="180" y="268" text-anchor="middle" dominant-baseline="central" fill="#993C1D">Kafka engine + detection MVs</text>
+
+  <rect x="380" y="230" width="250" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+  <text class="th" x="505" y="248" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Spark streaming</text>
+  <text class="ts" x="505" y="268" text-anchor="middle" dominant-baseline="central" fill="#534AB7">1-min rollups, watermark</text>
+
+  <line x1="300" y1="190" x2="200" y2="226" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="380" y1="190" x2="485" y2="226" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="50" y="320" width="260" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+  <text class="th" x="180" y="338" text-anchor="middle" dominant-baseline="central" fill="#712B13">alerts &#8594; IR copilot</text>
+  <text class="ts" x="180" y="358" text-anchor="middle" dominant-baseline="central" fill="#993C1D">LLM + approval gate</text>
+
+  <rect x="380" y="320" width="250" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+  <text class="th" x="505" y="338" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Iceberg on MinIO</text>
+  <text class="ts" x="505" y="358" text-anchor="middle" dominant-baseline="central" fill="#534AB7">REST catalog, snapshots</text>
+
+  <rect x="50" y="410" width="260" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+  <text class="th" x="180" y="428" text-anchor="middle" dominant-baseline="central" fill="#444441">Prometheus + Grafana</text>
+  <text class="ts" x="180" y="448" text-anchor="middle" dominant-baseline="central" fill="#5F5E5A">pipeline + fleet dashboards</text>
+
+  <rect x="380" y="410" width="250" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+  <text class="th" x="505" y="428" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Trino</text>
+  <text class="ts" x="505" y="448" text-anchor="middle" dominant-baseline="central" fill="#534AB7">SQL over history</text>
+
+  <line x1="180" y1="290" x2="180" y2="316" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="505" y1="290" x2="505" y2="316" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="180" y1="380" x2="180" y2="406" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="505" y1="380" x2="505" y2="406" stroke="#73726c" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <text class="ts" x="340" y="500" text-anchor="middle" fill="#5F5E5A">Teal = ingest &#183; coral = real-time detection &#183; purple = lakehouse &#183; gray = ops</text>
+</svg>

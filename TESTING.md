@@ -65,7 +65,7 @@ Guardrail test: type "delete all alerts" -> must be refused (SELECT-only).
 ### T7. Lakehouse path (optional, for the historical story)
 ```bash
 docker exec -it spark spark-submit \
-  --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.1 \
+  --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.5.5,org.apache.hadoop:hadoop-aws:3.3.4 \
   /home/iceberg/jobs/streaming_job.py          # leave running; UI :4040
 # after ~2 min, in another terminal:
 docker exec -it trino trino --execute "SELECT count(*) FROM iceberg.telemetry.gpu_metrics_1m"

@@ -11,6 +11,7 @@ Design notes:
 - 1-min tumbling window aggregation keyed (host_id, gpu_index)
 - checkpointing -> restart-safe, at-least-once into idempotent-friendly sink
 """
+import os
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import (StructType, StructField, StringType,
@@ -54,7 +55,7 @@ PARTITIONED BY (hours(window_start))
 raw = (spark.readStream.format("kafka")
        .option("kafka.bootstrap.servers", "kafka:19092")
        .option("subscribe", "telemetry.gpu.raw")
-       .option("startingOffsets", "earliest")
+       .option("startingOffsets", os.environ.get("STARTING_OFFSETS", "earliest"))
        .option("maxOffsetsPerTrigger", 50000)
        .load())
 
